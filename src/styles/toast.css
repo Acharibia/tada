@@ -55,8 +55,14 @@
     font-size: 14px;
     line-height: 1.5;
     opacity: 0;
-    transform: translateY(-20px);
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transform: var(--tada-enter-animation, translateY(-20px));
+    transition: all var(--tada-animation-duration, 0.3s) cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    outline: none;
+}
+
+.tada-toast:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
 }
 
 .tada-toast.tada-show {
@@ -66,7 +72,7 @@
 
 .tada-toast.tada-hide {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: var(--tada-exit-animation, translateY(-20px));
 }
 
 /* Toast types */

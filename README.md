@@ -1,18 +1,31 @@
 # 🎉 Tada
 
+[![npm version](https://img.shields.io/npm/v/@achabs/tada.svg)](https://www.npmjs.com/package/@achabs/tada)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@achabs/tada)](https://bundlephobia.com/package/@achabs/tada)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A lightweight, customizable toast notification library written in TypeScript.
+
+## Features
+
+- ✅ **Zero dependencies** - Lightweight and fast
+- ♿ **Accessible** - Full ARIA support and keyboard navigation
+- 🎨 **Customizable** - Custom animations, positions, and styling
+- 📦 **TypeScript** - Fully typed with excellent IDE support
+- 📱 **Responsive** - Works on all screen sizes
+- 🚀 **Performance** - Memory leak prevention and cleanup utilities
 
 ## Installation
 
 ```bash
-npm install tada
+npm install @achabs/tada
 ```
 
 ## Quick Start
 
 ```javascript
-import tada from "tada";
-import "tada/dist/index.css"; // Don't forget to import the CSS!
+import tada from "@achabs/tada";
+import "@achabs/tada/dist/index.css"; // Don't forget to import the CSS!
 
 // Show notifications
 tada.success("Operation successful!");
@@ -58,6 +71,22 @@ tada.show("Custom message", {
 - `bottom-center`
 - `bottom-right`
 
+### Advanced Options
+
+```javascript
+// Limit maximum toasts shown at once
+tada.show("Message", { maxToasts: 3 });
+
+// Custom animations
+tada.show("Message", {
+  animation: {
+    enter: "scale(0)",
+    exit: "scale(0)",
+    duration: 500
+  }
+});
+```
+
 ### Methods
 
 ```javascript
@@ -67,14 +96,27 @@ tada.remove(toast);
 
 // Clear all toasts
 tada.clear();
+
+// Cleanup (removes all toasts and containers)
+tada.destroy();
 ```
+
+### Accessibility
+
+Tada is built with accessibility in mind:
+
+- Full ARIA support (`role="alert"`, `aria-live`, `aria-atomic`)
+- Keyboard navigation (Press `Escape` to dismiss)
+- Keyboard support for close buttons (`Enter` or `Space`)
+- Screen reader friendly
+- Focus management
 
 ## TypeScript
 
 Fully typed with TypeScript support out of the box!
 
 ```typescript
-import tada, { TadaToast, ToastOptions } from "tada";
+import tada, { TadaToast, ToastOptions } from "@achabs/tada";
 
 const options: ToastOptions = {
   duration: 3000,
@@ -83,6 +125,18 @@ const options: ToastOptions = {
 
 tada.success("Typed!", options);
 ```
+
+## Demo
+
+Check out the [demo page](./demo/index.html) for live examples of all features!
+
+## Browser Support
+
+Tada works in all modern browsers that support ES2015.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
