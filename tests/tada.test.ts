@@ -177,4 +177,119 @@ describe('TadaToast', () => {
             expect(element.classList.contains('tada-hide')).toBe(true);
         });
     });
+
+    describe('Icon and Image support', () => {
+        it('should add icon when icon option is provided', () => {
+            const element = toast.show('Test', {
+                icon: '<svg><circle /></svg>'
+            });
+            const iconWrapper = element.querySelector('.tada-icon');
+            expect(iconWrapper).toBeTruthy();
+            expect(iconWrapper?.innerHTML).toContain('svg');
+        });
+
+        it('should add image when image option is provided', () => {
+            const element = toast.show('Test', {
+                image: 'https://example.com/image.png'
+            });
+            const imageWrapper = element.querySelector('.tada-image');
+            const img = imageWrapper?.querySelector('img');
+            expect(imageWrapper).toBeTruthy();
+            expect(img?.src).toBe('https://example.com/image.png');
+        });
+
+        it('should prioritize icon over image when both are provided', () => {
+            const element = toast.show('Test', {
+                icon: '<svg><circle /></svg>',
+                image: 'https://example.com/image.png'
+            });
+            const iconWrapper = element.querySelector('.tada-icon');
+            const imageWrapper = element.querySelector('.tada-image');
+            expect(iconWrapper).toBeTruthy();
+            expect(imageWrapper).toBeFalsy();
+        });
+    });
+
+    describe('Progress bar', () => {
+        it('should add progress bar when showProgress is true', () => {
+            const element = toast.show('Test', {
+                showProgress: true,
+                duration: 3000
+            });
+            const progressBar = element.querySelector('.tada-progress');
+            const progressFill = element.querySelector('.tada-progress-fill');
+            expect(progressBar).toBeTruthy();
+            expect(progressFill).toBeTruthy();
+        });
+
+        it('should not add progress bar when showProgress is false', () => {
+            const element = toast.show('Test', {
+                showProgress: false,
+                duration: 3000
+            });
+            const progressBar = element.querySelector('.tada-progress');
+            expect(progressBar).toBeFalsy();
+        });
+
+        it('should not add progress bar when duration is 0', () => {
+            const element = toast.show('Test', {
+                showProgress: true,
+                duration: 0
+            });
+            const progressBar = element.querySelector('.tada-progress');
+            expect(progressBar).toBeFalsy();
+        });
+    });
+
+    describe('Border radius', () => {
+        it('should apply custom border radius when provided', () => {
+            const element = toast.show('Test', {
+                borderRadius: '20px'
+            });
+            expect(element.style.borderRadius).toBe('20px');
+        });
+
+        it('should apply zero border radius for square corners', () => {
+            const element = toast.show('Test', {
+                borderRadius: '0'
+            });
+            expect(element.style.borderRadius).toBe('0px');
+        });
+
+        it('should use default border radius when not specified', () => {
+            const element = toast.show('Test');
+            expect(element.style.borderRadius).toBe('');
+        });
+    });
+
+    describe('Custom colors', () => {
+        it('should apply custom background color when provided', () => {
+            const element = toast.show('Test', {
+                backgroundColor: 'rgb(255, 0, 0)'
+            });
+            expect(element.style.backgroundColor).toBe('rgb(255, 0, 0)');
+        });
+
+        it('should apply custom text color when provided', () => {
+            const element = toast.show('Test', {
+                color: 'rgb(255, 255, 255)'
+            });
+            expect(element.style.color).toBe('rgb(255, 255, 255)');
+        });
+
+        it('should apply both custom colors when provided', () => {
+            const element = toast.show('Test', {
+                backgroundColor: 'rgb(0, 0, 0)',
+                color: 'rgb(255, 255, 0)'
+            });
+            expect(element.style.backgroundColor).toBe('rgb(0, 0, 0)');
+            expect(element.style.color).toBe('rgb(255, 255, 0)');
+        });
+
+        it('should use default colors when not specified', () => {
+            const element = toast.show('Test');
+            expect(element.style.backgroundColor).toBe('');
+            expect(element.style.color).toBe('');
+        });
+    });
 });

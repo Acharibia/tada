@@ -1,8 +1,8 @@
 {
   "name": "@achabs/tada",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
-  "description": "A lightweight toast notification library",
+  "description": "A lightweight, customizable toast notification library with icons, progress bars, and custom styling",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -30,13 +30,21 @@
     "alert",
     "popup",
     "message",
-    "snackbar"
+    "snackbar",
+    "toast-notification",
+    "notifications",
+    "progress-bar",
+    "icons",
+    "customizable",
+    "typescript",
+    "accessible",
+    "aria"
   ],
   "author": "Achabs <marshallacharibia@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Acharibia/tada.git"
+    "url": "git+https://github.com/Acharibia/tada.git"
   },
   "bugs": {
     "url": "https://github.com/Acharibia/tada/issues"

@@ -40,17 +40,19 @@
     transform: translateX(-50%);
 }
 
-/* Toast styles */
+/* Toast styles - Glassy appearance */
 .tada-toast {
     pointer-events: auto;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    position: relative;
     min-width: 300px;
     max-width: 500px;
     padding: 16px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    border: 1px solid;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     font-size: 14px;
     line-height: 1.5;
@@ -58,10 +60,11 @@
     transform: var(--tada-enter-animation, translateY(-20px));
     transition: all var(--tada-animation-duration, 0.3s) cubic-bezier(0.68, -0.55, 0.265, 1.55);
     outline: none;
+    overflow: hidden;
 }
 
 .tada-toast:focus {
-    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline: 2px solid rgba(99, 102, 241, 0.5);
     outline-offset: 2px;
 }
 
@@ -75,55 +78,120 @@
     transform: var(--tada-exit-animation, translateY(-20px));
 }
 
-/* Toast types */
+/* Toast types - Glassy colors */
 .tada-toast-default {
-    background-color: #333;
-    color: #fff;
+    background-color: rgba(243, 244, 246, 0.9);
+    border-color: rgba(229, 231, 235, 1);
+    color: rgba(55, 65, 81, 1);
 }
 
 .tada-toast-success {
-    background-color: #10b981;
-    color: #fff;
+    background-color: rgba(220, 252, 231, 0.9);
+    border-color: rgba(134, 239, 172, 1);
+    color: rgba(22, 101, 52, 1);
 }
 
 .tada-toast-error {
-    background-color: #ef4444;
-    color: #fff;
+    background-color: rgba(254, 226, 226, 0.9);
+    border-color: rgba(252, 165, 165, 1);
+    color: rgba(153, 27, 27, 1);
 }
 
 .tada-toast-warning {
-    background-color: #f59e0b;
-    color: #fff;
+    background-color: rgba(254, 243, 199, 0.9);
+    border-color: rgba(253, 224, 71, 1);
+    color: rgba(120, 53, 15, 1);
 }
 
 .tada-toast-info {
-    background-color: #3b82f6;
-    color: #fff;
+    background-color: rgba(219, 234, 254, 0.9);
+    border-color: rgba(147, 197, 253, 1);
+    color: rgba(30, 64, 175, 1);
+}
+
+/* Main content wrapper */
+.tada-main-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    flex: 1;
+}
+
+/* Icon */
+.tada-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+}
+
+.tada-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Image */
+.tada-image {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.tada-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* Content */
 .tada-content {
     flex: 1;
-    margin-right: 12px;
+    word-wrap: break-word;
 }
 
 /* Close button */
 .tada-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
     background: transparent;
     border: none;
     color: inherit;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 1;
     cursor: pointer;
-    padding: 0;
-    margin-left: 8px;
-    opacity: 0.7;
+    padding: 4px;
+    opacity: 0.6;
     transition: opacity 0.2s;
     flex-shrink: 0;
+    border-radius: 4px;
 }
 
 .tada-close:hover {
     opacity: 1;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Progress bar */
+.tada-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.tada-progress-fill {
+    height: 100%;
+    width: 100%;
+    background-color: currentColor;
+    opacity: 0.5;
 }
 
 /* Responsive */

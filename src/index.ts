@@ -2,7 +2,14 @@ import './styles/toast.css';
 import type { ToastOptions } from './types';
 
 class TadaToast {
-    private defaultOptions: Required<Omit<ToastOptions, 'animation'>> & { animation?: ToastOptions['animation'] };
+    private defaultOptions: Required<Omit<ToastOptions, 'animation' | 'icon' | 'image' | 'borderRadius' | 'backgroundColor' | 'color'>> & {
+        animation?: ToastOptions['animation'];
+        icon?: string;
+        image?: string;
+        borderRadius?: string;
+        backgroundColor?: string;
+        color?: string;
+    };
     private toasts: HTMLElement[];
     private containers: Map<string, HTMLElement>;
 
@@ -13,6 +20,7 @@ class TadaToast {
             type: 'default',
             closeButton: true,
             maxToasts: 0,
+            showProgress: false,
             ...options
         };
 
@@ -95,10 +103,45 @@ class TadaToast {
             }
         }
 
+        // Apply custom border radius if provided
+        if (config.borderRadius) {
+            toast.style.borderRadius = config.borderRadius;
+        }
+
+        // Apply custom colors if provided
+        if (config.backgroundColor) {
+            toast.style.backgroundColor = config.backgroundColor;
+        }
+        if (config.color) {
+            toast.style.color = config.color;
+        }
+
+        // Create main content wrapper
+        const mainContent = document.createElement('div');
+        mainContent.className = 'tada-main-content';
+
+        // Add icon or image if provided (icon takes precedence)
+        if (config.icon) {
+            const iconWrapper = document.createElement('div');
+            iconWrapper.className = 'tada-icon';
+            iconWrapper.innerHTML = config.icon;
+            mainContent.appendChild(iconWrapper);
+        } else if (config.image) {
+            const imageWrapper = document.createElement('div');
+            imageWrapper.className = 'tada-image';
+            const img = document.createElement('img');
+            img.src = config.image;
+            img.alt = 'Notification';
+            imageWrapper.appendChild(img);
+            mainContent.appendChild(imageWrapper);
+        }
+
         const contentWrapper = document.createElement('div');
         contentWrapper.className = 'tada-content';
         contentWrapper.textContent = message;
-        toast.appendChild(contentWrapper);
+        mainContent.appendChild(contentWrapper);
+
+        toast.appendChild(mainContent);
 
         if (config.closeButton) {
             const closeBtn = document.createElement('button');
@@ -116,6 +159,22 @@ class TadaToast {
             };
 
             toast.appendChild(closeBtn);
+        }
+
+        // Add progress bar if enabled
+        if (config.showProgress && config.duration > 0) {
+            const progressBar = document.createElement('div');
+            progressBar.className = 'tada-progress';
+            const progressFill = document.createElement('div');
+            progressFill.className = 'tada-progress-fill';
+            progressBar.appendChild(progressFill);
+            toast.appendChild(progressBar);
+
+            // Animate progress bar
+            setTimeout(() => {
+                progressFill.style.transition = `width ${config.duration}ms linear`;
+                progressFill.style.width = '0%';
+            }, 10);
         }
 
         // Keyboard support for toast dismissal
