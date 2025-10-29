@@ -246,7 +246,7 @@ tada.success("Typed!", options);
 
 ## Demo
 
-Check out the [demo page](./demo/index.html) for live examples of all features!
+Check out the [demo page](https://acharibia.github.io/tada/demo/index.html) for live examples of all features!
 
 ## Browser Support
 
